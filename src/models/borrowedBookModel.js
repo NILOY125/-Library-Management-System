@@ -2,23 +2,33 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const borrowedBookSchema = new Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User', 
-        required: true
-    },
     book: {
         type: Schema.Types.ObjectId,
-        ref: 'Book',
+        ref: "Book",
         required: true
     },
-    borrowedDate: {
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
+    borrowedAt: {
         type: Date,
         default: Date.now
     },
-    returnDate: {
-        type: Date
-    }
-});
+    dueDate: {
+        type: Date,
+        required: true
+    },
+    returnedAt: {
+        type: Date,
+        default: null
+    },
+    status: {
+        type: String,
+        enum: ["borrowed", "returned"],
+        default: "borrowed"
+    },
+}, { timestamps: true });
 
 module.exports = mongoose.model('BorrowedBook', borrowedBookSchema);
