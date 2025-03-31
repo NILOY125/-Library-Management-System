@@ -31,9 +31,9 @@ const authenticate = async (req, res, next) => {
     }
 };
 
-const authorize = (role) => {
+const authorize = (...roles) => {
     return (req, res, next) => {
-        if (!req.user || req.user.role !== role) {
+        if (!req.user || !roles.includes(req.user.role)) {
             return res.status(403).json({ status: 403, message: "Forbidden: You don't have permission to perform this action." });
         }
         next();

@@ -18,6 +18,14 @@ const bookSchema = new Schema({
         type: Number,
         required: true,
         default: 1
+    },
+    is_deleted: {
+        type: Boolean,
+        default: false
+    },
+    is_active:{
+        type: Boolean,
+        default: true
     }
 }, { timestamps: true });
 
